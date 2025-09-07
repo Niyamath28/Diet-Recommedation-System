@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test - Spoonacular</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>🍴 Spoonacular API Test</h1>
+    
+    <div class="test-section">
+        <h3>API Key Test</h3>
+        <p>Testing API key: <strong>f2c6b26569a641c4a1fcd5c87b19a562</strong></p>
+        <button onclick="testApiKey()">Test API Key</button>
+        <div id="apiKeyResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Meal Plan Generation Test</h3>
+        <button onclick="testMealPlan()">Generate Test Meal Plan</button>
+        <div id="mealPlanResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Recipe Search Test</h3>
+        <button onclick="testRecipeSearch()">Search Recipes</button>
+        <div id="recipeResult"></div>
+    </div>
+
+    <script>
+        const API_KEY = 'f2c6b26569a641c4a1fcd5c87b19a562';
+        const BASE_URL = 'https://api.spoonacular.com';
+
+        async function testApiKey() {
+            const resultDiv = document.getElementById('apiKeyResult');
+            resultDiv.innerHTML = '<p>Testing API key...</p>';
+            
+            try {
+                const response = await fetch(`${BASE_URL}/recipes/random?apiKey=${API_KEY}&number=1`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <h4>✅ API Key is working!</h4>
+                            <p>Response status: ${response.status}</p>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        </div>
+                    `;
+                } else {
+                    const errorText = await response.text();
+                    resultDiv.innerHTML = `
+                        <div class="error">
+                            <h4>❌ API Error</h4>
+                            <p>Status: ${response.status}</p>
+                            <p>Error: ${errorText}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h4>❌ Network Error</h4>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        async function testMealPlan() {
+            const resultDiv = document.getElementById('mealPlanResult');
+            resultDiv.innerHTML = '<p>Generating meal plan...</p>';
+            
+            try {
+                const params = new URLSearchParams({
+                    timeFrame: 'day',
+                    targetCalories: 2000,
+                    diet: 'vegetarian',
+                    apiKey: API_KEY
+                });
+
+                const response = await fetch(`${BASE_URL}/mealplanner/generate?${params}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <h4>✅ Meal Plan Generated Successfully!</h4>
+                            <p>Meals: ${data.meals ? data.meals.length : 0}</p>
+                            <p>Total Calories: ${data.nutrients ? data.nutrients.calories : 'N/A'}</p>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        </div>
+                    `;
+                } else {
+                    const errorText = await response.text();
+                    resultDiv.innerHTML = `
+                        <div class="error">
+                            <h4>❌ Meal Plan Error</h4>
+                            <p>Status: ${response.status}</p>
+                            <p>Error: ${errorText}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h4>❌ Network Error</h4>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        async function testRecipeSearch() {
+            const resultDiv = document.getElementById('recipeResult');
+            resultDiv.innerHTML = '<p>Searching recipes...</p>';
+            
+            try {
+                const params = new URLSearchParams({
+                    query: 'chicken',
+                    number: 3,
+                    apiKey: API_KEY
+                });
+
+                const response = await fetch(`${BASE_URL}/recipes/complexSearch?${params}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <h4>✅ Recipe Search Successful!</h4>
+                            <p>Found ${data.results ? data.results.length : 0} recipes</p>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        </div>
+                    `;
+                } else {
+                    const errorText = await response.text();
+                    resultDiv.innerHTML = `
+                        <div class="error">
+                            <h4>❌ Recipe Search Error</h4>
+                            <p>Status: ${response.status}</p>
+                            <p>Error: ${errorText}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h4>❌ Network Error</h4>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

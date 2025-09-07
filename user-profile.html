@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="🍴 User Profile - Manage your preferences and track your progress" />
+  <title>🍴 User Profile - Diet Recommendation App</title>
+  
+  <!-- Bootstrap 5.3.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <!-- Font Awesome 6.4.0 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-light">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="homepage.html">
+        <i class="fas fa-utensils me-2"></i>
+        Diet Recommendation App
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="homepage.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="meal-planning.html">Meal Planning</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="nutrition-tracking.html">Nutrition Tracking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="recipe-database.html">Recipe Database</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="user-profile.html">Profile</a>
+          </li>
+        </ul>
+        
+        <div class="d-flex align-items-center gap-2">
+          <button id="toggleTheme" class="btn btn-outline-light btn-sm">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container py-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <h1 class="display-5 fw-bold text-primary mb-2">
+          <i class="fas fa-user-circle me-3"></i>
+          User Profile
+        </h1>
+        <p class="lead text-muted">Manage your preferences, track your progress, and customize your experience</p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Profile Information -->
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header bg-primary text-white">
+            <h4 class="card-title mb-0">
+              <i class="fas fa-user me-2"></i>
+              Personal Information
+            </h4>
+          </div>
+          <div class="card-body p-4">
+            <form id="profileForm" class="row g-3">
+              <div class="col-12">
+                <label for="fullName" class="form-label fw-semibold">Full Name</label>
+                <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" />
+              </div>
+              
+              <div class="col-12">
+                <label for="email" class="form-label fw-semibold">Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="Enter your email" />
+              </div>
+              
+              <div class="col-md-6">
+                <label for="age" class="form-label fw-semibold">Age</label>
+                <input type="number" id="age" class="form-control" min="13" max="120" />
+              </div>
+              
+              <div class="col-md-6">
+                <label for="gender" class="form-label fw-semibold">Gender</label>
+                <select id="gender" class="form-select">
+                  <option value="">Select gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              
+              <div class="col-md-6">
+                <label for="weight" class="form-label fw-semibold">Weight (kg)</label>
+                <input type="number" id="weight" class="form-control" min="30" max="300" step="0.1" />
+              </div>
+              
+              <div class="col-md-6">
+                <label for="height" class="form-label fw-semibold">Height (cm)</label>
+                <input type="number" id="height" class="form-control" min="100" max="250" />
+              </div>
+              
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary w-100">
+                  <i class="fas fa-save me-2"></i>
+                  Save Profile
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Health Goals & Preferences -->
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header bg-success text-white">
+            <h4 class="card-title mb-0">
+              <i class="fas fa-target me-2"></i>
+              Health Goals & Preferences
+            </h4>
+          </div>
+          <div class="card-body p-4">
+            <form id="goalsForm" class="row g-3">
+              <div class="col-12">
+                <label for="activityLevel" class="form-label fw-semibold">Activity Level</label>
+                <select id="activityLevel" class="form-select">
+                  <option value="1.2">Sedentary (little or no exercise)</option>
+                  <option value="1.375">Lightly Active (light exercise 1-3 days/week)</option>
+                  <option value="1.55" selected>Moderately Active (moderate exercise 3-5 days/week)</option>
+                  <option value="1.725">Very Active (hard exercise 6-7 days/week)</option>
+                  <option value="1.9">Super Active (very hard exercise, physical job)</option>
+                </select>
+              </div>
+              
+              <div class="col-12">
+                <label for="dietPreference" class="form-label fw-semibold">Diet Preference</label>
+                <select id="dietPreference" class="form-select">
+                  <option value="">No restrictions</option>
+                  <option value="vegetarian">Vegetarian</option>
+                  <option value="vegan">Vegan</option>
+                  <option value="ketogenic">Ketogenic</option>
+                  <option value="paleo">Paleo</option>
+                  <option value="mediterranean">Mediterranean</option>
+                  <option value="gluten-free">Gluten-Free</option>
+                  <option value="dairy-free">Dairy-Free</option>
+                </select>
+              </div>
+              
+              <div class="col-12">
+                <label for="healthGoal" class="form-label fw-semibold">Health Goal</label>
+                <select id="healthGoal" class="form-select">
+                  <option value="maintain">Maintain current weight</option>
+                  <option value="lose">Lose weight</option>
+                  <option value="gain">Gain weight</option>
+                  <option value="muscle">Build muscle</option>
+                  <option value="endurance">Improve endurance</option>
+                </select>
+              </div>
+              
+              <div class="col-12">
+                <label for="weeklyGoal" class="form-label fw-semibold">Weekly Goal (kg)</label>
+                <input type="number" id="weeklyGoal" class="form-control" min="0" max="2" step="0.1" placeholder="0.5" />
+              </div>
+              
+              <div class="col-12">
+                <label for="allergies" class="form-label fw-semibold">Allergies & Intolerances</label>
+                <textarea id="allergies" class="form-control" rows="3" placeholder="List any food allergies or intolerances..."></textarea>
+              </div>
+              
+              <div class="col-12">
+                <button type="submit" class="btn btn-success w-100">
+                  <i class="fas fa-save me-2"></i>
+                  Save Goals
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Overview -->
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header bg-info text-white">
+            <h4 class="card-title mb-0">
+              <i class="fas fa-chart-line me-2"></i>
+              Progress Overview
+            </h4>
+          </div>
+          <div class="card-body p-4">
+            <div class="progress-stats">
+              <div class="stat-item mb-4">
+                <div class="d-flex justify-content-between mb-2">
+                  <span class="fw-semibold">Current Weight</span>
+                  <span class="fw-bold text-primary" id="currentWeight">-- kg</span>
+                </div>
+                <div class="progress" style="height: 8px;">
+                  <div class="progress-bar bg-primary" id="weightProgress" style="width: 0%"></div>
+                </div>
+                <small class="text-muted">Goal: <span id="targetWeight">-- kg</span></small>
+              </div>
+              
+              <div class="stat-item mb-4">
+                <div class="d-flex justify-content-between mb-2">
+                  <span class="fw-semibold">Daily Calories</span>
+                  <span class="fw-bold text-danger" id="dailyCalories">-- kcal</span>
+                </div>
+                <div class="progress" style="height: 8px;">
+                  <div class="progress-bar bg-danger" id="caloriesProgress" style="width: 0%"></div>
+                </div>
+                <small class="text-muted">Goal: <span id="calorieGoal">-- kcal</span></small>
+              </div>
+              
+              <div class="stat-item mb-4">
+                <div class="d-flex justify-content-between mb-2">
+                  <span class="fw-semibold">Streak Days</span>
+                  <span class="fw-bold text-success" id="streakDays">0 days</span>
+                </div>
+                <div class="progress" style="height: 8px;">
+                  <div class="progress-bar bg-success" id="streakProgress" style="width: 0%"></div>
+                </div>
+                <small class="text-muted">Best: <span id="bestStreak">0 days</span></small>
+              </div>
+            </div>
+            
+            <!-- BMI Calculator -->
+            <div class="bmi-calculator mt-4 p-3 bg-light rounded">
+              <h6 class="fw-semibold mb-3">BMI Calculator</h6>
+              <div class="bmi-result text-center">
+                <div class="bmi-value fw-bold text-primary" id="bmiValue">--</div>
+                <div class="bmi-category text-muted" id="bmiCategory">--</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Statistics Charts -->
+    <div class="row g-4 mt-4">
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-warning text-dark">
+            <h4 class="card-title mb-0">
+              <i class="fas fa-chart-area me-2"></i>
+              Weight Progress (Last 30 Days)
+            </h4>
+          </div>
+          <div class="card-body">
+            <canvas id="weightChart" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-secondary text-white">
+            <h4 class="card-title mb-0">
+              <i class="fas fa-chart-pie me-2"></i>
+              Nutrition Distribution
+            </h4>
+          </div>
+          <div class="card-body">
+            <canvas id="nutritionChart" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meal History -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-dark text-white">
+            <h4 class="card-title mb-0">
+              <i class="fas fa-history me-2"></i>
+              Recent Meal History
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Meal</th>
+                    <th>Calories</th>
+                    <th>Protein</th>
+                    <th>Carbs</th>
+                    <th>Fat</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="mealHistoryTable">
+                  <!-- Meal history will be populated here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-secondary text-white">
+            <h4 class="card-title mb-0">
+              <i class="fas fa-cog me-2"></i>
+              App Settings
+            </h4>
+          </div>
+          <div class="card-body p-4">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="notificationsEnabled" checked>
+                  <label class="form-check-label" for="notificationsEnabled">
+                    Enable notifications
+                  </label>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="darkModeEnabled">
+                  <label class="form-check-label" for="darkModeEnabled">
+                    Dark mode
+                  </label>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="autoSaveEnabled" checked>
+                  <label class="form-check-label" for="autoSaveEnabled">
+                    Auto-save progress
+                  </label>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="analyticsEnabled" checked>
+                  <label class="form-check-label" for="analyticsEnabled">
+                    Analytics tracking
+                  </label>
+                </div>
+              </div>
+              
+              <div class="col-12">
+                <button class="btn btn-secondary" onclick="userProfile.exportData()">
+                  <i class="fas fa-download me-2"></i>
+                  Export Data
+                </button>
+                <button class="btn btn-outline-danger ms-2" onclick="userProfile.clearData()">
+                  <i class="fas fa-trash me-2"></i>
+                  Clear All Data
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>🍴 Diet Recommendation App</h5>
+          <p class="text-muted">Your personalized health journey starts here.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p class="text-muted mb-0">&copy; 2024 Diet Recommendation App. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Custom JS -->
+  <script src="user-profile.js"></script>
+</body>
+</html>

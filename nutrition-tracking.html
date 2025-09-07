@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="🍴 Nutrition Tracking - Monitor your daily nutrition intake" />
+  <title>🍴 Nutrition Tracking - Diet Recommendation App</title>
+  
+  <!-- Bootstrap 5.3.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <!-- Font Awesome 6.4.0 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-light">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="homepage.html">
+        <i class="fas fa-utensils me-2"></i>
+        Diet Recommendation App
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="homepage.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="meal-planning.html">Meal Planning</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="nutrition-tracking.html">Nutrition Tracking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="recipe-database.html">Recipe Database</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="user-profile.html">Profile</a>
+          </li>
+        </ul>
+        
+        <div class="d-flex align-items-center gap-2">
+          <button id="toggleTheme" class="btn btn-outline-light btn-sm">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container py-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <h1 class="display-5 fw-bold text-primary mb-2">
+          <i class="fas fa-chart-line me-3"></i>
+          Nutrition Tracking
+        </h1>
+        <p class="lead text-muted">Monitor your daily nutrition intake and track your health goals</p>
+      </div>
+    </div>
+
+    <!-- Daily Summary Cards -->
+    <div class="row g-4 mb-5">
+      <div class="col-lg-3 col-md-6">
+        <div class="card nutrition-summary-card border-0 shadow-sm">
+          <div class="card-body text-center p-4">
+            <div class="nutrition-icon mb-3">
+              <i class="fas fa-fire text-danger" style="font-size: 2.5rem;"></i>
+            </div>
+            <h3 class="fw-bold text-danger mb-1" id="dailyCalories">0</h3>
+            <p class="text-muted mb-0">Calories</p>
+            <div class="progress mt-2" style="height: 6px;">
+              <div class="progress-bar bg-danger" id="caloriesProgress" style="width: 0%"></div>
+            </div>
+            <small class="text-muted" id="caloriesGoal">Goal: 2000 kcal</small>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6">
+        <div class="card nutrition-summary-card border-0 shadow-sm">
+          <div class="card-body text-center p-4">
+            <div class="nutrition-icon mb-3">
+              <i class="fas fa-drumstick-bite text-warning" style="font-size: 2.5rem;"></i>
+            </div>
+            <h3 class="fw-bold text-warning mb-1" id="dailyProtein">0g</h3>
+            <p class="text-muted mb-0">Protein</p>
+            <div class="progress mt-2" style="height: 6px;">
+              <div class="progress-bar bg-warning" id="proteinProgress" style="width: 0%"></div>
+            </div>
+            <small class="text-muted" id="proteinGoal">Goal: 150g</small>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6">
+        <div class="card nutrition-summary-card border-0 shadow-sm">
+          <div class="card-body text-center p-4">
+            <div class="nutrition-icon mb-3">
+              <i class="fas fa-bread-slice text-info" style="font-size: 2.5rem;"></i>
+            </div>
+            <h3 class="fw-bold text-info mb-1" id="dailyCarbs">0g</h3>
+            <p class="text-muted mb-0">Carbohydrates</p>
+            <div class="progress mt-2" style="height: 6px;">
+              <div class="progress-bar bg-info" id="carbsProgress" style="width: 0%"></div>
+            </div>
+            <small class="text-muted" id="carbsGoal">Goal: 250g</small>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6">
+        <div class="card nutrition-summary-card border-0 shadow-sm">
+          <div class="card-body text-center p-4">
+            <div class="nutrition-icon mb-3">
+              <i class="fas fa-cheese text-primary" style="font-size: 2.5rem;"></i>
+            </div>
+            <h3 class="fw-bold text-primary mb-1" id="dailyFat">0g</h3>
+            <p class="text-muted mb-0">Fat</p>
+            <div class="progress mt-2" style="height: 6px;">
+              <div class="progress-bar bg-primary" id="fatProgress" style="width: 0%"></div>
+            </div>
+            <small class="text-muted" id="fatGoal">Goal: 65g</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="row g-4 mb-5">
+      <!-- Nutrition Breakdown Chart -->
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header bg-primary text-white">
+            <h4 class="card-title mb-0">
+              <i class="fas fa-chart-pie me-2"></i>
+              Daily Nutrition Breakdown
+            </h4>
+          </div>
+          <div class="card-body">
+            <canvas id="nutritionChart" height="300"></canvas>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Weekly Progress Chart -->
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header bg-success text-white">
+            <h4 class="card-title mb-0">
+              <i class="fas fa-chart-line me-2"></i>
+              Weekly Calorie Intake
+            </h4>
+          </div>
+          <div class="card-body">
+            <canvas id="weeklyChart" height="300"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meal Logging Section -->
+    <div class="row g-4 mb-5">
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-info text-white">
+            <h4 class="card-title mb-0">
+              <i class="fas fa-plus-circle me-2"></i>
+              Log Your Meals
+            </h4>
+          </div>
+          <div class="card-body p-4">
+            <form id="mealLogForm" class="row g-3">
+              <div class="col-md-6">
+                <label for="mealType" class="form-label fw-semibold">Meal Type</label>
+                <select id="mealType" class="form-select" required>
+                  <option value="">Select meal type</option>
+                  <option value="breakfast">Breakfast</option>
+                  <option value="lunch">Lunch</option>
+                  <option value="dinner">Dinner</option>
+                  <option value="snack">Snack</option>
+                </select>
+              </div>
+              
+              <div class="col-md-6">
+                <label for="foodName" class="form-label fw-semibold">Food Item</label>
+                <input type="text" id="foodName" class="form-control" placeholder="e.g., Grilled Chicken Breast" required />
+              </div>
+              
+              <div class="col-md-3">
+                <label for="calories" class="form-label fw-semibold">Calories</label>
+                <input type="number" id="calories" class="form-control" placeholder="250" min="0" required />
+              </div>
+              
+              <div class="col-md-3">
+                <label for="protein" class="form-label fw-semibold">Protein (g)</label>
+                <input type="number" id="protein" class="form-control" placeholder="30" min="0" step="0.1" />
+              </div>
+              
+              <div class="col-md-3">
+                <label for="carbs" class="form-label fw-semibold">Carbs (g)</label>
+                <input type="number" id="carbs" class="form-control" placeholder="15" min="0" step="0.1" />
+              </div>
+              
+              <div class="col-md-3">
+                <label for="fat" class="form-label fw-semibold">Fat (g)</label>
+                <input type="number" id="fat" class="form-control" placeholder="8" min="0" step="0.1" />
+              </div>
+              
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-plus me-2"></i>
+                  Add Meal
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Today's Meals -->
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header bg-warning text-dark">
+            <h4 class="card-title mb-0">
+              <i class="fas fa-list me-2"></i>
+              Today's Meals
+            </h4>
+          </div>
+          <div class="card-body">
+            <div id="todaysMeals">
+              <!-- Meals will be populated here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Goals Setting -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-secondary text-white">
+            <h4 class="card-title mb-0">
+              <i class="fas fa-target me-2"></i>
+              Set Your Goals
+            </h4>
+          </div>
+          <div class="card-body p-4">
+            <form id="goalsForm" class="row g-3">
+              <div class="col-md-3">
+                <label for="calorieGoal" class="form-label fw-semibold">Daily Calorie Goal</label>
+                <input type="number" id="calorieGoal" class="form-control" placeholder="2000" min="800" max="5000" />
+              </div>
+              
+              <div class="col-md-3">
+                <label for="proteinGoal" class="form-label fw-semibold">Daily Protein Goal (g)</label>
+                <input type="number" id="proteinGoal" class="form-control" placeholder="150" min="0" />
+              </div>
+              
+              <div class="col-md-3">
+                <label for="carbsGoal" class="form-label fw-semibold">Daily Carbs Goal (g)</label>
+                <input type="number" id="carbsGoal" class="form-control" placeholder="250" min="0" />
+              </div>
+              
+              <div class="col-md-3">
+                <label for="fatGoal" class="form-label fw-semibold">Daily Fat Goal (g)</label>
+                <input type="number" id="fatGoal" class="form-control" placeholder="65" min="0" />
+              </div>
+              
+              <div class="col-12">
+                <button type="submit" class="btn btn-secondary">
+                  <i class="fas fa-save me-2"></i>
+                  Save Goals
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>🍴 Diet Recommendation App</h5>
+          <p class="text-muted">Your personalized health journey starts here.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p class="text-muted mb-0">&copy; 2024 Diet Recommendation App. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Custom JS -->
+  <script src="nutrition-tracking.js"></script>
+</body>
+</html>

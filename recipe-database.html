@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="🍴 Recipe Database - Discover healthy recipes and cooking ideas" />
+  <title>🍴 Recipe Database - Diet Recommendation App</title>
+  
+  <!-- Bootstrap 5.3.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <!-- Font Awesome 6.4.0 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-light">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="homepage.html">
+        <i class="fas fa-utensils me-2"></i>
+        Diet Recommendation App
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="homepage.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="meal-planning.html">Meal Planning</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="nutrition-tracking.html">Nutrition Tracking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="recipe-database.html">Recipe Database</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="user-profile.html">Profile</a>
+          </li>
+        </ul>
+        
+        <div class="d-flex align-items-center gap-2">
+          <button id="toggleTheme" class="btn btn-outline-light btn-sm">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container py-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <h1 class="display-5 fw-bold text-primary mb-2">
+          <i class="fas fa-book me-3"></i>
+          Recipe Database
+        </h1>
+        <p class="lead text-muted">Discover thousands of healthy recipes tailored to your dietary preferences</p>
+      </div>
+    </div>
+
+    <!-- Search and Filters -->
+    <div class="row mb-5">
+      <div class="col-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <form id="recipeSearchForm" class="row g-3">
+              <div class="col-lg-4 col-md-6">
+                <label for="searchQuery" class="form-label fw-semibold">
+                  <i class="fas fa-search text-primary me-2"></i>
+                  Search Recipes
+                </label>
+                <input type="text" id="searchQuery" class="form-control" 
+                       placeholder="e.g., chicken salad, pasta, smoothie" />
+              </div>
+              
+              <div class="col-lg-2 col-md-6">
+                <label for="dietFilter" class="form-label fw-semibold">
+                  <i class="fas fa-filter text-success me-2"></i>
+                  Diet Type
+                </label>
+                <select id="dietFilter" class="form-select">
+                  <option value="">All Diets</option>
+                  <option value="vegetarian">Vegetarian</option>
+                  <option value="vegan">Vegan</option>
+                  <option value="ketogenic">Ketogenic</option>
+                  <option value="paleo">Paleo</option>
+                  <option value="mediterranean">Mediterranean</option>
+                  <option value="gluten-free">Gluten-Free</option>
+                  <option value="dairy-free">Dairy-Free</option>
+                </select>
+              </div>
+              
+              <div class="col-lg-2 col-md-6">
+                <label for="cuisineFilter" class="form-label fw-semibold">
+                  <i class="fas fa-globe text-info me-2"></i>
+                  Cuisine
+                </label>
+                <select id="cuisineFilter" class="form-select">
+                  <option value="">All Cuisines</option>
+                  <option value="italian">Italian</option>
+                  <option value="mexican">Mexican</option>
+                  <option value="asian">Asian</option>
+                  <option value="american">American</option>
+                  <option value="indian">Indian</option>
+                  <option value="mediterranean">Mediterranean</option>
+                </select>
+              </div>
+              
+              <div class="col-lg-2 col-md-6">
+                <label for="maxCalories" class="form-label fw-semibold">
+                  <i class="fas fa-fire text-danger me-2"></i>
+                  Max Calories
+                </label>
+                <input type="number" id="maxCalories" class="form-control" 
+                       placeholder="500" min="0" max="2000" />
+              </div>
+              
+              <div class="col-lg-2 col-md-6">
+                <label for="maxTime" class="form-label fw-semibold">
+                  <i class="fas fa-clock text-warning me-2"></i>
+                  Max Time (min)
+                </label>
+                <input type="number" id="maxTime" class="form-control" 
+                       placeholder="30" min="0" max="300" />
+              </div>
+              
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <i class="fas fa-search me-2"></i>
+                  Search Recipes
+                </button>
+                <button type="button" id="clearFilters" class="btn btn-outline-secondary btn-lg ms-2">
+                  <i class="fas fa-times me-2"></i>
+                  Clear Filters
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Categories -->
+    <div class="row mb-5">
+      <div class="col-12">
+        <h3 class="fw-bold mb-3">
+          <i class="fas fa-star text-warning me-2"></i>
+          Featured Categories
+        </h3>
+        <div class="row g-3">
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="category-card card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-3">
+                <i class="fas fa-sun text-warning mb-2" style="font-size: 2rem;"></i>
+                <h6 class="card-title">Breakfast</h6>
+                <small class="text-muted">Start your day right</small>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="category-card card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-3">
+                <i class="fas fa-sun text-success mb-2" style="font-size: 2rem;"></i>
+                <h6 class="card-title">Lunch</h6>
+                <small class="text-muted">Midday fuel</small>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="category-card card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-3">
+                <i class="fas fa-moon text-primary mb-2" style="font-size: 2rem;"></i>
+                <h6 class="card-title">Dinner</h6>
+                <small class="text-muted">Evening meals</small>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="category-card card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-3">
+                <i class="fas fa-cookie-bite text-info mb-2" style="font-size: 2rem;"></i>
+                <h6 class="card-title">Snacks</h6>
+                <small class="text-muted">Healthy bites</small>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="category-card card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-3">
+                <i class="fas fa-leaf text-success mb-2" style="font-size: 2rem;"></i>
+                <h6 class="card-title">Vegetarian</h6>
+                <small class="text-muted">Plant-based</small>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="category-card card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-3">
+                <i class="fas fa-dumbbell text-danger mb-2" style="font-size: 2rem;"></i>
+                <h6 class="card-title">High Protein</h6>
+                <small class="text-muted">Muscle building</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="text-center d-none">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="mt-2 text-muted">Searching for recipes...</p>
+    </div>
+
+    <!-- Recipe Results -->
+    <div id="recipeResults" class="row g-4">
+      <!-- Recipe cards will be populated here -->
+    </div>
+
+    <!-- Pagination -->
+    <div class="row mt-5">
+      <div class="col-12">
+        <nav aria-label="Recipe pagination">
+          <ul class="pagination justify-content-center" id="pagination">
+            <!-- Pagination will be populated here -->
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- No Results Message -->
+    <div id="noResults" class="text-center d-none">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-5">
+          <i class="fas fa-search text-muted mb-3" style="font-size: 4rem;"></i>
+          <h4 class="text-muted">No recipes found</h4>
+          <p class="text-muted">Try adjusting your search criteria or browse our featured categories.</p>
+          <button class="btn btn-primary" onclick="document.getElementById('recipeSearchForm').reset();">
+            <i class="fas fa-refresh me-2"></i>
+            Reset Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Recipe Modal -->
+  <div class="modal fade" id="recipeModal" tabindex="-1" aria-labelledby="recipeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="recipeModalLabel">Recipe Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="recipeModalBody">
+          <!-- Recipe details will be populated here -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="addToMealPlan">
+            <i class="fas fa-plus me-2"></i>
+            Add to Meal Plan
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>🍴 Diet Recommendation App</h5>
+          <p class="text-muted">Your personalized health journey starts here.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p class="text-muted mb-0">&copy; 2024 Diet Recommendation App. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Custom JS -->
+  <script src="recipe-database.js"></script>
+</body>
+</html>

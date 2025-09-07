@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="🍴 Diet Recommendation Web App - Personalized meal plans and nutrition tracking" />
+  <title>🍴 Diet Recommendation Web App - Your Health Journey Starts Here</title>
+  
+  <!-- Bootstrap 5.3.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <!-- Font Awesome 6.4.0 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-light">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="homepage.html">
+        <i class="fas fa-utensils me-2"></i>
+        Diet Recommendation App
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="homepage.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="meal-planning.html">Meal Planning</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="nutrition-tracking.html">Nutrition Tracking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="recipe-database.html">Recipe Database</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="user-profile.html">Profile</a>
+          </li>
+        </ul>
+        
+        <div class="d-flex align-items-center gap-2">
+          <button id="toggleTheme" class="btn btn-outline-light btn-sm">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section bg-gradient-primary text-white py-5">
+    <div class="container">
+      <div class="row align-items-center min-vh-75">
+        <div class="col-lg-6">
+          <h1 class="display-4 fw-bold mb-4">
+            🍴 Your Personalized Diet Journey Starts Here
+          </h1>
+          <p class="lead mb-4">
+            Get personalized meal plans, track your nutrition, and discover healthy recipes tailored to your goals and preferences.
+          </p>
+          <div class="d-flex gap-3">
+            <a href="meal-planning.html" class="btn btn-light btn-lg px-4">
+              <i class="fas fa-utensils me-2"></i>
+              Start Planning
+            </a>
+            <a href="#features" class="btn btn-outline-light btn-lg px-4">
+              <i class="fas fa-info-circle me-2"></i>
+              Learn More
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center">
+          <div class="hero-image">
+            <i class="fas fa-heartbeat text-white" style="font-size: 15rem; opacity: 0.1;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-5">
+    <div class="container">
+      <div class="row text-center mb-5">
+        <div class="col-12">
+          <h2 class="display-5 fw-bold mb-3">Why Choose Our Diet App?</h2>
+          <p class="lead text-muted">Comprehensive features designed to support your health journey</p>
+        </div>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+              <div class="feature-icon mb-3">
+                <i class="fas fa-chart-pie text-primary" style="font-size: 3rem;"></i>
+              </div>
+              <h4 class="card-title">📊 Calorie-Based Planning</h4>
+              <p class="card-text text-muted">
+                Get personalized daily meal plans based on your target calorie intake and dietary preferences.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+              <div class="feature-icon mb-3">
+                <i class="fas fa-leaf text-success" style="font-size: 3rem;"></i>
+              </div>
+              <h4 class="card-title">🥗 Dietary Preferences</h4>
+              <p class="card-text text-muted">
+                Choose from vegetarian, vegan, keto, paleo, or no restrictions - we've got you covered.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+              <div class="feature-icon mb-3">
+                <i class="fas fa-chart-line text-info" style="font-size: 3rem;"></i>
+              </div>
+              <h4 class="card-title">🧾 Nutrition Tracking</h4>
+              <p class="card-text text-muted">
+                Track your daily nutrition with detailed breakdowns of calories, protein, carbs, and fats.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+              <div class="feature-icon mb-3">
+                <i class="fas fa-utensils text-warning" style="font-size: 3rem;"></i>
+              </div>
+              <h4 class="card-title">🍽 Meal Recommendations</h4>
+              <p class="card-text text-muted">
+                Get suggested breakfast, lunch, and dinner options with complete recipe details.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+              <div class="feature-icon mb-3">
+                <i class="fas fa-book text-danger" style="font-size: 3rem;"></i>
+              </div>
+              <h4 class="card-title">🔗 Recipe Database</h4>
+              <p class="card-text text-muted">
+                Access thousands of recipes with step-by-step instructions and nutritional information.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+              <div class="feature-icon mb-3">
+                <i class="fas fa-mobile-alt text-secondary" style="font-size: 3rem;"></i>
+              </div>
+              <h4 class="card-title">🎨 Responsive Design</h4>
+              <p class="card-text text-muted">
+                Clean, modern interface that works perfectly on desktop, tablet, and mobile devices.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="py-5 bg-white">
+    <div class="container">
+      <div class="row text-center mb-5">
+        <div class="col-12">
+          <h2 class="display-5 fw-bold mb-3">How It Works</h2>
+          <p class="lead text-muted">Simple steps to get your personalized diet plan</p>
+        </div>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+          <div class="step-card text-center">
+            <div class="step-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+              <span class="fw-bold">1</span>
+            </div>
+            <h5>Enter Calories</h5>
+            <p class="text-muted">Set your target daily calorie intake</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+          <div class="step-card text-center">
+            <div class="step-number bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+              <span class="fw-bold">2</span>
+            </div>
+            <h5>Choose Diet</h5>
+            <p class="text-muted">Select your dietary preferences</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+          <div class="step-card text-center">
+            <div class="step-number bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+              <span class="fw-bold">3</span>
+            </div>
+            <h5>Get Plan</h5>
+            <p class="text-muted">Receive your personalized meal plan</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+          <div class="step-card text-center">
+            <div class="step-number bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+              <span class="fw-bold">4</span>
+            </div>
+            <h5>Track Progress</h5>
+            <p class="text-muted">Monitor your nutrition and goals</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="display-5 fw-bold mb-4">Ready to Start Your Health Journey?</h2>
+          <p class="lead mb-4">
+            Join thousands of users who have transformed their eating habits with our personalized diet recommendations.
+          </p>
+          <a href="meal-planning.html" class="btn btn-light btn-lg px-5">
+            <i class="fas fa-rocket me-2"></i>
+            Get Started Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>🍴 Diet Recommendation App</h5>
+          <p class="text-muted">Your personalized health journey starts here.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p class="text-muted mb-0">&copy; 2024 Diet Recommendation App. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Custom JS -->
+  <script src="app.js"></script>
+</body>
+</html>

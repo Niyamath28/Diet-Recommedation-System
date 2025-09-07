@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="🍴 Meal Planning - Generate personalized daily meal plans" />
+  <title>🍴 Meal Planning - Diet Recommendation App</title>
+  
+  <!-- Bootstrap 5.3.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <!-- Font Awesome 6.4.0 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-light">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="homepage.html">
+        <i class="fas fa-utensils me-2"></i>
+        Diet Recommendation App
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="homepage.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="meal-planning.html">Meal Planning</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="nutrition-tracking.html">Nutrition Tracking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="recipe-database.html">Recipe Database</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="user-profile.html">Profile</a>
+          </li>
+        </ul>
+        
+        <div class="d-flex align-items-center gap-2">
+          <button id="toggleTheme" class="btn btn-outline-light btn-sm">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container py-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <h1 class="display-5 fw-bold text-primary mb-2">
+          <i class="fas fa-utensils me-3"></i>
+          Meal Planning
+        </h1>
+        <p class="lead text-muted">Generate personalized daily meal plans based on your calorie needs and dietary preferences</p>
+      </div>
+    </div>
+
+    <!-- Meal Plan Generator Form -->
+    <div class="row mb-5">
+      <div class="col-lg-8">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-primary text-white">
+            <h3 class="card-title mb-0">
+              <i class="fas fa-cog me-2"></i>
+              Meal Plan Generator
+            </h3>
+          </div>
+          <div class="card-body p-4">
+            <form id="mealPlanForm" class="row g-3">
+              <div class="col-md-6">
+                <label for="targetCalories" class="form-label fw-semibold">
+                  <i class="fas fa-fire text-danger me-2"></i>
+                  Target Daily Calories
+                </label>
+                <div class="input-group">
+                  <input type="number" id="targetCalories" class="form-control" 
+                         placeholder="2000" min="800" max="5000" required />
+                  <span class="input-group-text">kcal</span>
+                </div>
+                <div class="form-text">Recommended: 1500-2500 kcal for adults</div>
+              </div>
+              
+              <div class="col-md-6">
+                <label for="dietType" class="form-label fw-semibold">
+                  <i class="fas fa-leaf text-success me-2"></i>
+                  Diet Type
+                </label>
+                <select id="dietType" class="form-select" required>
+                  <option value="">Select diet type</option>
+                  <option value="vegetarian">Vegetarian</option>
+                  <option value="vegan">Vegan</option>
+                  <option value="ketogenic">Ketogenic</option>
+                  <option value="paleo">Paleo</option>
+                  <option value="mediterranean">Mediterranean</option>
+                  <option value="gluten-free">Gluten-Free</option>
+                  <option value="dairy-free">Dairy-Free</option>
+                  <option value="whole30">Whole30</option>
+                  <option value="low-carb">Low-Carb</option>
+                  <option value="low-fat">Low-Fat</option>
+                </select>
+              </div>
+              
+              <div class="col-md-6">
+                <label for="excludeIngredients" class="form-label fw-semibold">
+                  <i class="fas fa-ban text-warning me-2"></i>
+                  Exclude Ingredients
+                </label>
+                <input type="text" id="excludeIngredients" class="form-control" 
+                       placeholder="nuts, shellfish, soy" />
+                <div class="form-text">Separate multiple ingredients with commas</div>
+              </div>
+              
+              <div class="col-md-6">
+                <label for="timeFrame" class="form-label fw-semibold">
+                  <i class="fas fa-calendar text-info me-2"></i>
+                  Time Frame
+                </label>
+                <select id="timeFrame" class="form-select">
+                  <option value="day">Daily Plan</option>
+                  <option value="week">Weekly Plan</option>
+                </select>
+              </div>
+              
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-lg w-100">
+                  <i class="fas fa-magic me-2"></i>
+                  Generate Meal Plan
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Quick Stats -->
+      <div class="col-lg-4">
+        <div class="card shadow-sm border-0 h-100">
+          <div class="card-header bg-success text-white">
+            <h4 class="card-title mb-0">
+              <i class="fas fa-chart-pie me-2"></i>
+              Nutrition Overview
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="nutrition-summary">
+              <div class="nutrition-item d-flex justify-content-between mb-3">
+                <span><i class="fas fa-fire text-danger me-2"></i>Calories</span>
+                <span class="fw-bold" id="totalCalories">0</span>
+              </div>
+              <div class="nutrition-item d-flex justify-content-between mb-3">
+                <span><i class="fas fa-drumstick-bite text-warning me-2"></i>Protein</span>
+                <span class="fw-bold" id="totalProtein">0g</span>
+              </div>
+              <div class="nutrition-item d-flex justify-content-between mb-3">
+                <span><i class="fas fa-bread-slice text-info me-2"></i>Carbs</span>
+                <span class="fw-bold" id="totalCarbs">0g</span>
+              </div>
+              <div class="nutrition-item d-flex justify-content-between mb-3">
+                <span><i class="fas fa-cheese text-primary me-2"></i>Fat</span>
+                <span class="fw-bold" id="totalFat">0g</span>
+              </div>
+            </div>
+            
+            <!-- Nutrition Chart -->
+            <div class="mt-4">
+              <canvas id="nutritionChart" width="300" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="text-center d-none">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="mt-2 text-muted">Generating your personalized meal plan...</p>
+    </div>
+
+    <!-- Meal Plan Results -->
+    <div id="mealPlanResults" class="d-none">
+      <!-- Daily Meal Plan -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <h3 class="fw-bold mb-3">
+            <i class="fas fa-calendar-day text-primary me-2"></i>
+            Your Daily Meal Plan
+          </h3>
+        </div>
+      </div>
+      
+      <div class="row g-4 mb-5">
+        <!-- Breakfast -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card meal-card h-100 border-0 shadow-sm">
+            <div class="card-header bg-warning text-dark">
+              <h5 class="card-title mb-0">
+                <i class="fas fa-sun me-2"></i>
+                Breakfast
+              </h5>
+            </div>
+            <div class="card-body">
+              <div id="breakfastMeal">
+                <!-- Breakfast meal will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Lunch -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card meal-card h-100 border-0 shadow-sm">
+            <div class="card-header bg-success text-white">
+              <h5 class="card-title mb-0">
+                <i class="fas fa-sun me-2"></i>
+                Lunch
+              </h5>
+            </div>
+            <div class="card-body">
+              <div id="lunchMeal">
+                <!-- Lunch meal will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Dinner -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card meal-card h-100 border-0 shadow-sm">
+            <div class="card-header bg-primary text-white">
+              <h5 class="card-title mb-0">
+                <i class="fas fa-moon me-2"></i>
+                Dinner
+              </h5>
+            </div>
+            <div class="card-body">
+              <div id="dinnerMeal">
+                <!-- Dinner meal will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shopping List -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card shadow-sm border-0">
+            <div class="card-header bg-info text-white">
+              <h4 class="card-title mb-0">
+                <i class="fas fa-shopping-cart me-2"></i>
+                Shopping List
+              </h4>
+            </div>
+            <div class="card-body">
+              <div id="shoppingList" class="row g-3">
+                <!-- Shopping list items will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <div id="errorMessage" class="alert alert-danger d-none" role="alert">
+      <i class="fas fa-exclamation-triangle me-2"></i>
+      <span id="errorText">An error occurred while generating your meal plan.</span>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>🍴 Diet Recommendation App</h5>
+          <p class="text-muted">Your personalized health journey starts here.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p class="text-muted mb-0">&copy; 2024 Diet Recommendation App. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Custom JS -->
+  <script src="meal-planning.js"></script>
+</body>
+</html>
